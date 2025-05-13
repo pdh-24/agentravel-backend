@@ -36,6 +36,6 @@ jobs:
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
           cd ~/agentravel-backend &&
           /home/ti3a/.bun/bin/pm2 describe hono-app > /dev/null &&
-          /home/ti3a/.bun/bin/pm2 restart hono-app ||
-          /home/ti3a/.bun/bin/pm2 start index.ts --name hono-app --interpreter ~/.bun/bin/bun
+          /home/ti3a/.bun/bin/pm2 restart --interpreter ~/.bun/bin/bun hono-app ||
+          /home/ti3a/.bun/bin/pm2 start --interpreter ~/.bun/bin/bun index.ts --name hono-app
         '
