@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "bun run --hot --no-clear-screen src/index.ts",
     "build": "bun build.ts",
-    "start": "bun run ./build/backend.js"
+    "start": "bun ./build/backend.js"
   },
   "dependencies": {
     "hono": "^4.7.9",
