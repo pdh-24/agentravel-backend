@@ -24,7 +24,7 @@ jobs:
     - name: Run app on VM
       run: |
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
-          cd ~/app &&
+          cd ~/agentravel-backend &&
           git pull origin main && 
           bun install && 
           bun build && 
