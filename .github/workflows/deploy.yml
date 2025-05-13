@@ -21,13 +21,12 @@ jobs:
     - name: Install sshpass
       run: sudo apt-get install sshpass
 
-    - name: SSH Deployment
-      run: |
-        sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 'bash -s' < deploy-script.sh
-
     - name: Run app on VM
       run: |
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
           cd ~/app &&
+          git pull origin main && 
+          bun install && 
+          bun build && 
           bun start
         '
