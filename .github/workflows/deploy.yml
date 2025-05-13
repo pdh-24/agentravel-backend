@@ -27,7 +27,7 @@ jobs:
     # Copy the build result to the VM
     - name: Copy build files to VM
       run: |
-        sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -r build/* ti3a@70.153.16.116/home/ti3a/agentravel-backend/
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -r build/* ti3a@70.153.16.116:/home/ti3a/agentravel-backend/
 
 
     # Run app on VM (only after build is copied)
