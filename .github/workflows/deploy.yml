@@ -26,7 +26,7 @@ jobs:
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
           cd ~/agentravel-backend &&
           git pull origin main && 
-          bun install && 
-          bun build && 
-          bun start
+          /home/ti3a/.bun/bin/bun install && 
+          /home/ti3a/.bun/bin/bun build && 
+          /home/ti3a/.bun/bin/bun start
         '
