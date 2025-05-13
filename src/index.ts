@@ -512,4 +512,5 @@ app.get("/laporan", async c => {
     }
 });
 
-export default app
+// Jalankan aplikasi di port 3000
+app.listen({ port: 3000 });
