@@ -7,40 +7,16 @@ import { Pengguna,
          LogTransaksi, 
          Laporan 
 } from '@/database/model/all';
+import { tes } from '@/src/routes/tes';
 
 const app = new Hono().basePath("/api");
 
 // Koneksi database hanya sekali sebelum rute dijalankan
 await dbConnect();
+
 app.get('/', async (c) => c.json({ message: 'Hello from Hono!' }));
+app.route("", tes)
 
-app.get('/hello', async (c) => c.json({ message: 'Hello from Hono!' }));
-app.get('/hello2', (c) => c.json({ message: 'Selamat datang di Hono!' }));
-
-app.post("/tambahManual", async c => {
-    console.log("Menambahkan data manual");
-
-    // Query dan lain-lain
-    try {
-        const body = await c.req.json();
-        const newUser = new Pengguna({
-            username: body.name,
-            email: body.email,
-            password: body.password, // Harus di-hash dalam produksi
-            role: body.role,
-        });
-
-        await newUser.save();
-        return c.json({ message: "Berhasil menambahkan data manual" });
-    } catch (error: unknown) {
-        if (error instanceof Error) {
-            return c.json({ error: error.message }, 400);
-        }
-        return c.json({ error: String(error) }, 500);
-    }
-});
-
-// Rute-rute API antara Next.js (frontend) dan Hono (backend)
 /* -------------- MANAJEMEN PENGGUNA -------------- */
 app.get("/pengguna", async c => {
         console.log("Mengambil data semua pengguna");
@@ -48,7 +24,7 @@ app.get("/pengguna", async c => {
         // Query dan lain-lain
         try {
             const pengguna = await Pengguna.find();
-            console.log("Cek");
+            // console.log("Cek\n");
             return c.json({ 
                 status: "berhasil", 
                 data: pengguna 
