@@ -1,8 +1,8 @@
 await Bun.build({
   entrypoints: ['./src/index.ts'],
   outdir: './build',
-  naming: 'backend.js',
-  format: 'cjs',
+  naming: 'backend.ts',
+  format: 'esm',
   target: 'bun',
 });
 
