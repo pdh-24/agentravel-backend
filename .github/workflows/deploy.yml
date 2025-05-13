@@ -18,15 +18,21 @@ jobs:
       with:
         bun-version: "latest" # atau tulis versi spesifik
 
-    - name: Install sshpass
-      run: sudo apt-get install sshpass
+    # Install dependencies and build the app on GitHub Actions
+    - name: Install dependencies and build app
+      run: |
+        /home/runner/.bun/bin/bun install
+        /home/runner/.bun/bin/bun run build
 
+    # Copy the build result to the VM
+    - name: Copy build files to VM
+      run: |
+        scp -r dist/* ti3a@70.153.16.116:/home/ti3a/agentravel-backend/dist/
+
+    # Run app on VM (only after build is copied)
     - name: Run app on VM
       run: |
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
           cd ~/agentravel-backend &&
-          git pull origin main && 
-          /home/ti3a/.bun/bin/bun install && 
-          /home/ti3a/.bun/bin/bun run build && 
           /home/ti3a/.bun/bin/bun start
         '
