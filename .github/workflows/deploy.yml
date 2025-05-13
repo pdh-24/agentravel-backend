@@ -37,5 +37,5 @@ jobs:
           cd ~/agentravel-backend &&
           /home/ti3a/.bun/bin/pm2 describe hono-app > /dev/null 2>&1 &&
           /home/ti3a/.bun/bin/pm2 restart hono-app || 
-          /home/ti3a/.bun/bin/pm2 start backend.js --name hono-app
+          /home/ti3a/.bun/bin/pm2 start backend.js --name hono-app --interpreter ~/.bun/bin/bun
         '
