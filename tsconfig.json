@@ -1,7 +1,17 @@
 {
   "compilerOptions": {
     "strict": true,
+    "allowJs": true,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
-  }
+    "jsxImportSource": "hono/jsx",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "outDir": "build",         // 🟢 Tambahkan ini
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
 }
