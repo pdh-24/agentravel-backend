@@ -27,6 +27,6 @@ jobs:
           cd ~/agentravel-backend &&
           git pull origin main && 
           /home/ti3a/.bun/bin/bun install && 
-          /home/ti3a/.bun/bin/bun build && 
+          /home/ti3a/.bun/bin/bun run build && 
           /home/ti3a/.bun/bin/bun start
         '

@@ -9,7 +9,7 @@
     "jsxImportSource": "hono/jsx",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "outDir": "build",         // 🟢 Tambahkan ini
+    "outDir": "out",         // 🟢 Tambahkan ini
     "paths": {
       "@/*": ["./*"]
     }
