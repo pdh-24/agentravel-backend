@@ -23,7 +23,7 @@ async function dbConnect() {
   try {
     const conn = await mongoose.connect(MONGODB_URI, options);
     isConnected = true;
-    console.log('[MongoDB] ✅ Connected to DB:', conn.connection.name, "\n");
+    // console.log('[MongoDB] ✅ Connected to DB:', conn.connection.name, "\n");
   } catch (error) {
     console.error('[MongoDB] ❌ Connection error:', error);
     throw error;
