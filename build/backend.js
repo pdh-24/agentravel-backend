@@ -216,7 +216,7 @@ var require_bson = __commonJS((exports) => {
   }
   var nodejsRandomBytes = (() => {
     try {
-      return __require("crypto").randomBytes;
+      return __require("node:crypto").randomBytes;
     } catch {
       return nodejsMathRandomBytes;
     }
@@ -5932,13 +5932,13 @@ var require_utils = __commonJS((exports) => {
   exports.decorateDecryptionResult = decorateDecryptionResult;
   exports.addAbortListener = addAbortListener;
   exports.abortable = abortable;
-  var crypto = __require("crypto");
-  var fs_1 = __require("fs");
-  var http = __require("http");
-  var timers_1 = __require("timers");
-  var url = __require("url");
-  var url_1 = __require("url");
-  var util_1 = __require("util");
+  var crypto = __require("node:crypto");
+  var fs_1 = __require("node:fs");
+  var http = __require("node:http");
+  var timers_1 = __require("node:timers");
+  var url = __require("node:url");
+  var url_1 = __require("node:url");
+  var util_1 = __require("node:util");
   var bson_1 = require_bson2();
   var constants_1 = require_constants2();
   var constants_2 = require_constants();
@@ -6755,7 +6755,7 @@ var require_mongo_logger = __commonJS((exports) => {
   exports.createStdioLogger = createStdioLogger;
   exports.stringifyWithMaxLen = stringifyWithMaxLen;
   exports.defaultLogTransform = defaultLogTransform;
-  var util_1 = __require("util");
+  var util_1 = __require("node:util");
   var bson_1 = require_bson2();
   var constants_1 = require_constants();
   var utils_1 = require_utils();
@@ -7296,7 +7296,7 @@ var require_mongo_logger = __commonJS((exports) => {
 var require_mongo_types = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.CancellationToken = exports.TypedEventEmitter = undefined;
-  var events_1 = __require("events");
+  var events_1 = __require("node:events");
   var mongo_logger_1 = require_mongo_logger();
   var utils_1 = require_utils();
 
@@ -7517,7 +7517,7 @@ var require_server_selection = __commonJS((exports) => {
 var require_timeout = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.LegacyTimeoutContext = exports.CSOTTimeoutContext = exports.TimeoutContext = exports.Timeout = exports.TimeoutError = undefined;
-  var timers_1 = __require("timers");
+  var timers_1 = __require("node:timers");
   var error_1 = require_error();
   var utils_1 = require_utils();
 
@@ -11546,7 +11546,7 @@ var require_gssapi = __commonJS((exports) => {
   exports.GSSAPI = exports.GSSAPICanonicalizationValue = undefined;
   exports.performGSSAPICanonicalizeHostName = performGSSAPICanonicalizeHostName;
   exports.resolveCname = resolveCname;
-  var dns = __require("dns");
+  var dns = __require("node:dns");
   var deps_1 = require_deps();
   var error_1 = require_error();
   var utils_1 = require_utils();
@@ -15826,8 +15826,8 @@ var require_client_metadata = __commonJS((exports) => {
   exports.makeClientMetadata = makeClientMetadata;
   exports.addContainerMetadata = addContainerMetadata;
   exports.getFAASEnv = getFAASEnv;
-  var os = __require("os");
-  var process2 = __require("process");
+  var os = __require("node:os");
+  var process2 = __require("node:process");
   var bson_1 = require_bson2();
   var error_1 = require_error();
   var utils_1 = require_utils();
@@ -16404,8 +16404,8 @@ var require_compression = __commonJS((exports) => {
   exports.decompress = decompress;
   exports.compressCommand = compressCommand;
   exports.decompressResponse = decompressResponse;
-  var util_1 = __require("util");
-  var zlib = __require("zlib");
+  var util_1 = __require("node:util");
+  var zlib = __require("node:zlib");
   var constants_1 = require_constants();
   var deps_1 = require_deps();
   var error_1 = require_error();
@@ -16545,7 +16545,7 @@ var require_crypto_callbacks = __commonJS((exports) => {
   exports.sha256Hook = sha256Hook;
   exports.makeHmacHook = makeHmacHook;
   exports.signRsaSha256Hook = signRsaSha256Hook;
-  var crypto = __require("crypto");
+  var crypto = __require("node:crypto");
   function makeAES256Hook(method, mode) {
     return function(key, iv, input, output) {
       let result;
@@ -16951,9 +16951,9 @@ var require_providers2 = __commonJS((exports) => {
 var require_state_machine = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.StateMachine = undefined;
-  var fs = __require("fs/promises");
-  var net = __require("net");
-  var tls = __require("tls");
+  var fs = __require("node:fs/promises");
+  var net = __require("node:net");
+  var tls = __require("node:tls");
   var bson_1 = require_bson2();
   var abstract_cursor_1 = require_abstract_cursor();
   var deps_1 = require_deps();
@@ -17579,7 +17579,7 @@ var require_mongocryptd_manager = __commonJS((exports) => {
     }
     async spawn() {
       const cmdName = this.spawnPath || "mongocryptd";
-      const { spawn } = __require("child_process");
+      const { spawn } = __require("node:child_process");
       this._child = spawn(cmdName, this.spawnArgs, {
         stdio: "ignore",
         detached: true
@@ -17611,7 +17611,7 @@ var require_auto_encrypter = __commonJS((exports) => {
   var _a;
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.AutoEncrypter = exports.AutoEncryptionLoggerLevel = undefined;
-  var net = __require("net");
+  var net = __require("node:net");
   var bson_1 = require_bson2();
   var constants_1 = require_constants();
   var deps_1 = require_deps();
@@ -17775,7 +17775,7 @@ var require_auto_encrypter = __commonJS((exports) => {
 var require_encrypter = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.Encrypter = undefined;
-  var util_1 = __require("util");
+  var util_1 = __require("node:util");
   var auto_encrypter_1 = require_auto_encrypter();
   var constants_1 = require_constants();
   var deps_1 = require_deps();
@@ -19392,8 +19392,8 @@ var require_connection = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.CryptoConnection = exports.SizedMessageTransform = exports.Connection = undefined;
   exports.hasSessionSupport = hasSessionSupport;
-  var stream_1 = __require("stream");
-  var timers_1 = __require("timers");
+  var stream_1 = __require("node:stream");
+  var timers_1 = __require("node:timers");
   var bson_1 = require_bson2();
   var constants_1 = require_constants();
   var error_1 = require_error();
@@ -19839,8 +19839,8 @@ var require_connect = __commonJS((exports) => {
   exports.performInitialHandshake = performInitialHandshake;
   exports.prepareHandshakeDocument = prepareHandshakeDocument;
   exports.makeSocket = makeSocket;
-  var net = __require("net");
-  var tls = __require("tls");
+  var net = __require("node:net");
+  var tls = __require("node:tls");
   var constants_1 = require_constants();
   var deps_1 = require_deps();
   var error_1 = require_error();
@@ -20418,7 +20418,7 @@ var require_errors2 = __commonJS((exports) => {
 var require_connection_pool = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.ConnectionPool = exports.PoolState = undefined;
-  var timers_1 = __require("timers");
+  var timers_1 = __require("node:timers");
   var constants_1 = require_constants();
   var error_1 = require_error();
   var mongo_types_1 = require_mongo_types();
@@ -21143,7 +21143,7 @@ var require_server = __commonJS((exports) => {
 var require_monitor = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.RTTSampler = exports.MonitorInterval = exports.RTTPinger = exports.Monitor = exports.ServerMonitoringMode = undefined;
-  var timers_1 = __require("timers");
+  var timers_1 = __require("node:timers");
   var bson_1 = require_bson2();
   var connect_1 = require_connect();
   var client_metadata_1 = require_client_metadata();
@@ -21617,9 +21617,9 @@ var require_connection_string = __commonJS((exports) => {
   exports.DEFAULT_OPTIONS = exports.OPTIONS = undefined;
   exports.resolveSRVRecord = resolveSRVRecord;
   exports.parseOptions = parseOptions;
-  var dns = __require("dns");
+  var dns = __require("node:dns");
   var mongodb_connection_string_url_1 = require_lib2();
-  var url_1 = __require("url");
+  var url_1 = __require("node:url");
   var mongo_credentials_1 = require_mongo_credentials();
   var providers_1 = require_providers();
   var client_metadata_1 = require_client_metadata();
@@ -22786,7 +22786,7 @@ var require_command_builders = __commonJS((exports) => {
 var require_machine_workflow = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.MachineWorkflow = undefined;
-  var promises_1 = __require("timers/promises");
+  var promises_1 = __require("node:timers/promises");
   var utils_1 = require_utils();
   var command_builders_1 = require_command_builders();
   var THROTTLE_MS = 100;
@@ -22948,7 +22948,7 @@ var require_gcp_machine_workflow = __commonJS((exports) => {
 var require_k8s_machine_workflow = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.K8SMachineWorkflow = undefined;
-  var promises_1 = __require("fs/promises");
+  var promises_1 = __require("node:fs/promises");
   var machine_workflow_1 = require_machine_workflow();
   var FALLBACK_FILENAME = "/var/run/secrets/kubernetes.io/serviceaccount/token";
   var AZURE_FILENAME = "AZURE_FEDERATED_TOKEN_FILE";
@@ -23033,7 +23033,7 @@ var require_token_cache = __commonJS((exports) => {
 var require_token_machine_workflow = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.TokenMachineWorkflow = undefined;
-  var fs = __require("fs");
+  var fs = __require("node:fs");
   var error_1 = require_error();
   var machine_workflow_1 = require_machine_workflow();
   var TOKEN_MISSING_ERROR = "OIDC_TOKEN_FILE must be set in the environment.";
@@ -23114,7 +23114,7 @@ var require_mongodb_oidc = __commonJS((exports) => {
 var require_callback_workflow = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.CallbackWorkflow = exports.AUTOMATED_TIMEOUT_MS = exports.HUMAN_TIMEOUT_MS = undefined;
-  var promises_1 = __require("timers/promises");
+  var promises_1 = __require("node:timers/promises");
   var error_1 = require_error();
   var utils_1 = require_utils();
   var command_builders_1 = require_command_builders();
@@ -23696,7 +23696,7 @@ var require_memory_code_points = __commonJS((exports) => {
 // node_modules/@mongodb-js/saslprep/dist/code-points-data.js
 var require_code_points_data = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
-  var zlib_1 = __require("zlib");
+  var zlib_1 = __require("node:zlib");
   exports.default = (0, zlib_1.gunzipSync)(Buffer.from("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", "base64"));
 });
 
@@ -23722,7 +23722,7 @@ var require_scram = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.ScramSHA256 = exports.ScramSHA1 = undefined;
   var saslprep_1 = require_node();
-  var crypto = __require("crypto");
+  var crypto = __require("node:crypto");
   var bson_1 = require_bson2();
   var error_1 = require_error();
   var utils_1 = require_utils();
@@ -24070,7 +24070,7 @@ var require_mongo_client_auth_providers = __commonJS((exports) => {
 var require_download = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.GridFSBucketReadStream = undefined;
-  var stream_1 = __require("stream");
+  var stream_1 = __require("node:stream");
   var abstract_cursor_1 = require_abstract_cursor();
   var error_1 = require_error();
   var timeout_1 = require_timeout();
@@ -24317,7 +24317,7 @@ var require_download = __commonJS((exports) => {
 var require_upload = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.GridFSBucketWriteStream = undefined;
-  var stream_1 = __require("stream");
+  var stream_1 = __require("node:stream");
   var bson_1 = require_bson2();
   var abstract_cursor_1 = require_abstract_cursor();
   var error_1 = require_error();
@@ -24786,8 +24786,8 @@ var require_server_selection_events = __commonJS((exports) => {
 var require_srv_polling = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.SrvPoller = exports.SrvPollingEvent = undefined;
-  var dns = __require("dns");
-  var timers_1 = __require("timers");
+  var dns = __require("node:dns");
+  var timers_1 = __require("node:timers");
   var error_1 = require_error();
   var mongo_types_1 = require_mongo_types();
   var utils_1 = require_utils();
@@ -26512,7 +26512,7 @@ var require_topology = __commonJS((exports) => {
 var require_mongo_client = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.MongoClient = exports.ServerApiVersion = undefined;
-  var fs_1 = __require("fs");
+  var fs_1 = __require("node:fs");
   var bson_1 = require_bson2();
   var change_stream_1 = require_change_stream();
   var mongo_credentials_1 = require_mongo_credentials();
@@ -26823,7 +26823,7 @@ var require_resource_management = __commonJS((exports) => {
 var require_abstract_cursor = __commonJS((exports) => {
   Object.defineProperty(exports, "__esModule", { value: true });
   exports.CursorTimeoutContext = exports.AbstractCursor = exports.CursorTimeoutMode = exports.CURSOR_FLAGS = undefined;
-  var stream_1 = __require("stream");
+  var stream_1 = __require("node:stream");
   var bson_1 = require_bson2();
   var error_1 = require_error();
   var mongo_types_1 = require_mongo_types();
@@ -28423,7 +28423,7 @@ var require_collection2 = __commonJS((exports, module) => {
   /*!
    * Module dependencies.
    */
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var STATES = require_connectionState();
   var immediate = require_immediate();
   function Collection(name, conn, opts) {
@@ -28880,8 +28880,8 @@ var require_collection3 = __commonJS((exports, module) => {
   var ObjectId2 = require_objectid();
   var getConstructorName = require_getConstructorName();
   var internalToObjectOptions = require_options().internalToObjectOptions;
-  var stream = __require("stream");
-  var util = __require("util");
+  var stream = __require("node:stream");
+  var util = __require("node:util");
   var formatToObjectOptions = Object.freeze({ ...internalToObjectOptions, copyTrustedSymbol: false });
   function NativeCollection(name, conn, options) {
     this.collection = null;
@@ -29204,7 +29204,7 @@ var require_changeStream = __commonJS((exports, module) => {
   /*!
    * Module dependencies.
    */
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var MongooseError = require_mongooseError();
   /*!
    * ignore
@@ -29849,7 +29849,7 @@ var require_cast = __commonJS((exports, module) => {
    * Module dependencies.
    */
   var MongooseError = require_mongooseError();
-  var util = __require("util");
+  var util = __require("node:util");
 
   class CastError extends MongooseError {
     constructor(type, value, path, reason, schemaType) {
@@ -29972,7 +29972,7 @@ var require_notFound = __commonJS((exports, module) => {
    * Module dependencies.
    */
   var MongooseError = require_mongooseError();
-  var util = __require("util");
+  var util = __require("node:util");
 
   class DocumentNotFoundError extends MongooseError {
     constructor(filter, model, numAffected, result) {
@@ -30027,7 +30027,7 @@ var require_validation = __commonJS((exports, module) => {
    */
   var MongooseError = require_mongooseError();
   var getConstructorName = require_getConstructorName();
-  var util = __require("util");
+  var util = __require("node:util");
   var combinePathErrors = require_combinePathErrors();
 
   class ValidationError extends MongooseError {
@@ -31880,7 +31880,7 @@ var require_common3 = __commonJS((exports) => {
   var isBsonType = require_isBsonType();
   var isMongooseObject = require_isMongooseObject();
   var MongooseError = require_error2();
-  var util = __require("util");
+  var util = __require("node:util");
   exports.flatten = flatten;
   exports.modifiedPaths = modifiedPaths;
   /*!
@@ -32697,7 +32697,7 @@ var require_subdocument = __commonJS((exports, module) => {
   var Document = require_document2();
   var immediate = require_immediate();
   var internalToObjectOptions = require_options().internalToObjectOptions;
-  var util = __require("util");
+  var util = __require("node:util");
   var utils = require_utils3();
   module.exports = Subdocument;
   function Subdocument(value, fields, parent, skipId, options) {
@@ -32957,7 +32957,7 @@ var require_arraySubdocument = __commonJS((exports, module) => {
   /*!
    * Module dependencies.
    */
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var Subdocument = require_subdocument();
   var utils = require_utils3();
   var documentArrayParent = require_symbols().documentArrayParent;
@@ -34041,7 +34041,7 @@ var require_document2 = __commonJS((exports, module) => {
    * Module dependencies.
    */
   var DivergentArrayError = require_divergentArray();
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var InternalCache = require_internal();
   var MongooseBuffer = require_buffer();
   var MongooseError = require_error2();
@@ -34071,7 +34071,7 @@ var require_document2 = __commonJS((exports, module) => {
   var isDefiningProjection = require_isDefiningProjection();
   var isExclusive = require_isExclusive();
   var isPathExcluded = require_isPathExcluded();
-  var inspect = __require("util").inspect;
+  var inspect = __require("node:util").inspect;
   var internalToObjectOptions = require_options().internalToObjectOptions;
   var markArraySubdocsPopulated = require_markArraySubdocsPopulated();
   var minimize = require_minimize();
@@ -38520,7 +38520,7 @@ var require_modelNamesFromRefPath = __commonJS((exports, module) => {
   var isPathExcluded = require_isPathExcluded();
   var lookupLocalFields = require_lookupLocalFields();
   var mpath = require_mpath();
-  var util = __require("util");
+  var util = __require("node:util");
   var utils = require_utils3();
   var hasNumericPropRE = /(\.\d+$|\.\d+\.)/g;
   module.exports = function modelNamesFromRefPath(refPath, doc, populatedPath, modelSchema, queryProjection) {
@@ -39277,7 +39277,7 @@ var require_setupTimestamps = __commonJS((exports, module) => {
 // node_modules/mongoose/lib/helpers/populate/validateRef.js
 var require_validateRef = __commonJS((exports, module) => {
   var MongooseError = require_mongooseError();
-  var util = __require("util");
+  var util = __require("node:util");
   module.exports = validateRef;
   function validateRef(ref, path) {
     if (typeof ref === "string") {
@@ -39466,7 +39466,7 @@ var require_map = __commonJS((exports, module) => {
   var deepEqual = require_utils3().deepEqual;
   var getConstructorName = require_getConstructorName();
   var handleSpreadDoc = require_handleSpreadDoc();
-  var util = __require("util");
+  var util = __require("node:util");
   var specialProperties = require_specialProperties();
   var isBsonType = require_isBsonType();
   var cleanModifiedSubpaths = require_cleanModifiedSubpaths();
@@ -39750,7 +39750,7 @@ var require_arrayDepth = __commonJS((exports, module) => {
 
 // node_modules/mongoose/lib/cast/number.js
 var require_number = __commonJS((exports, module) => {
-  var assert = __require("assert");
+  var assert = __require("node:assert");
   module.exports = function castNumber(val) {
     if (val == null) {
       return val;
@@ -40122,7 +40122,7 @@ var require_cast2 = __commonJS((exports, module) => {
   var get = require_get();
   var getSchemaDiscriminatorByValue = require_getSchemaDiscriminatorByValue();
   var isOperator = require_isOperator();
-  var util = __require("util");
+  var util = __require("node:util");
   var isObject = require_isObject();
   var isMongooseObject = require_isMongooseObject();
   var utils = require_utils3();
@@ -40831,7 +40831,7 @@ var require_array2 = __commonJS((exports, module) => {
   var clone = require_clone();
   var getConstructorName = require_getConstructorName();
   var isOperator = require_isOperator();
-  var util = __require("util");
+  var util = __require("node:util");
   var utils = require_utils3();
   var castToNumber = require_helpers().castToNumber;
   var createJSONSchemaTypeDefinition = require_createJSONSchemaTypeDefinition();
@@ -41714,7 +41714,7 @@ var require_schemaDateOptions = __commonJS((exports, module) => {
 
 // node_modules/mongoose/lib/cast/date.js
 var require_date = __commonJS((exports, module) => {
-  var assert = __require("assert");
+  var assert = __require("node:assert");
   module.exports = function castDate(value) {
     if (value == null || value === "") {
       return null;
@@ -41922,7 +41922,7 @@ var require_date2 = __commonJS((exports, module) => {
 // node_modules/mongoose/lib/cast/decimal128.js
 var require_decimal1282 = __commonJS((exports, module) => {
   var Decimal128Type = require_decimal128();
-  var assert = __require("assert");
+  var assert = __require("node:assert");
   module.exports = function castDecimal128(value) {
     if (value == null) {
       return value;
@@ -42679,7 +42679,7 @@ var require_subdocument2 = __commonJS((exports, module) => {
    * Module dependencies.
    */
   var CastError = require_cast();
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var ObjectExpectedError = require_objectExpected();
   var SchemaSubdocumentOptions = require_schemaSubdocumentOptions();
   var SchemaType = require_schemaType();
@@ -42986,7 +42986,7 @@ var require_documentArray2 = __commonJS((exports, module) => {
    */
   var CastError = require_cast();
   var DocumentArrayElement = require_documentArrayElement();
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var SchemaArray = require_array2();
   var SchemaDocumentArrayOptions = require_schemaDocumentArrayOptions();
   var SchemaType = require_schemaType();
@@ -44158,7 +44158,7 @@ var require_uuid3 = __commonJS((exports, module) => {
 
 // node_modules/mongoose/lib/cast/double.js
 var require_double2 = __commonJS((exports, module) => {
-  var assert = __require("assert");
+  var assert = __require("node:assert");
   var BSON = require_bson();
   var isBsonType = require_isBsonType();
   module.exports = function castDouble(val) {
@@ -44290,7 +44290,7 @@ var require_double3 = __commonJS((exports, module) => {
 // node_modules/mongoose/lib/cast/int32.js
 var require_int32 = __commonJS((exports, module) => {
   var isBsonType = require_isBsonType();
-  var assert = __require("assert");
+  var assert = __require("node:assert");
   module.exports = function castInt32(val) {
     if (val == null) {
       return val;
@@ -44461,7 +44461,7 @@ var require_schema2 = __commonJS((exports, module) => {
   /*!
    * Module dependencies.
    */
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var Kareem = require_kareem();
   var MongooseError = require_mongooseError();
   var SchemaType = require_schemaType();
@@ -46981,7 +46981,7 @@ var require_castBulkWrite = __commonJS((exports, module) => {
   var castUpdate = require_castUpdate();
   var clone = require_clone();
   var decorateUpdateWithVersionKey = require_decorateUpdateWithVersionKey();
-  var { inspect } = __require("util");
+  var { inspect } = __require("node:util");
   var setDefaultsOnInsert = require_setDefaultsOnInsert();
   module.exports = function castBulkWrite(originalModel, op, options) {
     const now = originalModel.base.now();
@@ -47227,7 +47227,7 @@ var require_connection2 = __commonJS((exports, module) => {
    * Module dependencies.
    */
   var ChangeStream = require_changeStream();
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var Schema = require_schema2();
   var STATES = require_connectionState();
   var MongooseBulkWriteError = require_bulkWriteError();
@@ -48039,7 +48039,7 @@ var require_package2 = __commonJS((exports, module) => {
   module.exports = {
     name: "mongoose",
     description: "Mongoose MongoDB ODM",
-    version: "8.14.2",
+    version: "8.14.3",
     author: "Guillermo Rauch <guillermo@learnboost.com>",
     keywords: [
       "mongodb",
@@ -48761,13 +48761,13 @@ var require_queryCursor = __commonJS((exports, module) => {
    * Module dependencies.
    */
   var MongooseError = require_mongooseError();
-  var Readable = __require("stream").Readable;
+  var Readable = __require("node:stream").Readable;
   var eachAsync = require_eachAsync();
   var helpers = require_queryHelpers();
   var kareem = require_kareem();
   var immediate = require_immediate();
-  var { once } = __require("events");
-  var util = __require("util");
+  var { once } = __require("node:events");
+  var util = __require("node:util");
   function QueryCursor(query) {
     Readable.call(this, { autoDestroy: true, objectMode: true });
     this.cursor = null;
@@ -49650,7 +49650,7 @@ var require_common4 = __commonJS((exports, module) => {
       createDebug.namespaces = namespaces;
       createDebug.names = [];
       createDebug.skips = [];
-      const split = (typeof namespaces === "string" ? namespaces : "").trim().replace(" ", ",").split(",").filter(Boolean);
+      const split = (typeof namespaces === "string" ? namespaces : "").trim().replace(/\s+/g, ",").split(",").filter(Boolean);
       for (const ns of split) {
         if (ns[0] === "-") {
           createDebug.skips.push(ns.slice(1));
@@ -49860,7 +49860,7 @@ var require_browser = __commonJS((exports, module) => {
   function load() {
     let r;
     try {
-      r = exports.storage.getItem("debug");
+      r = exports.storage.getItem("debug") || exports.storage.getItem("DEBUG");
     } catch (error) {}
     if (!r && typeof process !== "undefined" && "env" in process) {
       r = process.env.DEBUG;
@@ -49885,8 +49885,8 @@ var require_browser = __commonJS((exports, module) => {
 
 // node_modules/debug/src/node.js
 var require_node2 = __commonJS((exports, module) => {
-  var tty = __require("tty");
-  var util = __require("util");
+  var tty = __require("node:tty");
+  var util = __require("node:util");
   exports.init = init;
   exports.log = log;
   exports.formatArgs = formatArgs;
@@ -50214,8 +50214,8 @@ var require_collection5 = __commonJS((exports, module) => {
 
 // node_modules/mquery/lib/mquery.js
 var require_mquery = __commonJS((exports, module) => {
-  var assert = __require("assert");
-  var util = __require("util");
+  var assert = __require("node:assert");
+  var util = __require("node:util");
   var utils = require_utils4();
   var debug = require_src()("mquery");
   function Query(criteria, options) {
@@ -51650,7 +51650,7 @@ var require_query = __commonJS((exports, module) => {
   var setDefaultsOnInsert = require_setDefaultsOnInsert();
   var specialProperties = require_specialProperties();
   var updateValidators = require_updateValidators();
-  var util = __require("util");
+  var util = __require("node:util");
   var utils = require_utils3();
   var queryMiddlewareFunctions = require_constants3().queryMiddlewareFunctions;
   var queryOptionMethods = new Set([
@@ -53800,11 +53800,11 @@ var require_aggregationCursor = __commonJS((exports, module) => {
    * Module dependencies.
    */
   var MongooseError = require_mongooseError();
-  var Readable = __require("stream").Readable;
+  var Readable = __require("node:stream").Readable;
   var eachAsync = require_eachAsync();
   var immediate = require_immediate();
   var kareem = require_kareem();
-  var util = __require("util");
+  var util = __require("node:util");
   function AggregationCursor(agg) {
     Readable.call(this, { autoDestroy: true, objectMode: true });
     this.cursor = null;
@@ -57273,7 +57273,7 @@ var require_model = __commonJS((exports, module) => {
   var ChangeStream = require_changeStream();
   var Document = require_document2();
   var DocumentNotFoundError = require_notFound();
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var Kareem = require_kareem();
   var MongooseBulkWriteError = require_bulkWriteError();
   var MongooseError = require_error2();
@@ -57328,7 +57328,7 @@ var require_model = __commonJS((exports, module) => {
   var pushNestedArrayPaths = require_pushNestedArrayPaths();
   var removeDeselectedForeignField = require_removeDeselectedForeignField();
   var setDottedPath = require_setDottedPath();
-  var util = __require("util");
+  var util = __require("node:util");
   var utils = require_utils3();
   var minimize = require_minimize();
   var MongooseBulkSaveIncompleteError = require_bulkSaveIncompleteError();
@@ -59856,7 +59856,7 @@ var require_setOptionError = __commonJS((exports, module) => {
    * Module requirements
    */
   var MongooseError = require_mongooseError();
-  var util = __require("util");
+  var util = __require("node:util");
   var combinePathErrors = require_combinePathErrors();
 
   class SetOptionError extends MongooseError {
@@ -59928,7 +59928,7 @@ var require_browserDocument = __commonJS((exports, module) => {
    * Module dependencies.
    */
   var NodeJSDocument = require_document2();
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var MongooseError = require_error2();
   var Schema = require_schema2();
   var ObjectId2 = require_objectid();
@@ -60024,7 +60024,7 @@ var require_mongoose = __commonJS((exports, module) => {
    * Module dependencies.
    */
   var Document = require_document2();
-  var EventEmitter = __require("events").EventEmitter;
+  var EventEmitter = __require("node:events").EventEmitter;
   var Kareem = require_kareem();
   var Schema = require_schema2();
   var SchemaType = require_schemaType();
@@ -60053,7 +60053,7 @@ var require_mongoose = __commonJS((exports, module) => {
   var defaultConnectionSymbol = Symbol("mongoose:defaultConnection");
   require_printJestWarning();
   var objectIdHexRegexp = /^[0-9A-Fa-f]{24}$/;
-  var { AsyncLocalStorage } = __require("async_hooks");
+  var { AsyncLocalStorage } = __require("node:async_hooks");
   function Mongoose(options) {
     this.connections = [];
     this.nextConnectionId = 0;
