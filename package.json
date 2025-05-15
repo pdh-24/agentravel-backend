@@ -2,8 +2,6 @@
   "name": "agentravel-backend",
   "scripts": {
     "dev": "bun run --hot --no-clear-screen src/index.ts",
-    "build": "bun build.js",
-    "start": "bun ./build/backend.js"
   },
   "dependencies": {
     "@azure/functions": "^4.7.1-preview",
