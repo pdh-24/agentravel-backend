@@ -513,8 +513,8 @@ app.get("/laporan", async c => {
 });
 
 // Jalankan aplikasi di port 3000
-// export default { 
-//     port: 3000, 
-//     fetch: app.fetch, 
-// } 
-export default app
+export default { 
+    port: 3000, 
+    fetch: app.fetch, 
+} 
+// export default app
