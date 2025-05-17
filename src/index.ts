@@ -392,7 +392,7 @@ app.post("/invois", async c => {
         // Query dan lain-lain
         try {
             const body = await c.req.json();
-            const invoisBaru = new Pembayaran({ 
+            const invoisBaru = new Invois({ 
                 reservation_id: body.reservation_id,
                 total_amount: body.total_amount,
                 fee: body.fee,
