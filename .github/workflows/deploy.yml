@@ -31,7 +31,9 @@ jobs:
     - name: Run app on VM
       run: |
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
-          
           cd ~/agentravel-backend &&
+          pkill -f "bun ./backend.js" || true &&
+          sleep 2 &&
           nohup ~/.bun/bin/bun ./backend.js > bun.log 2>&1 &
-        ' >/dev/null 2>&1 & sleep 10
+          echo "Application started"
+        '
