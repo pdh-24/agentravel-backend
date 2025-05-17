@@ -1,34 +1,39 @@
-        name: Deploy Node.js Function App to Azure
+name: Deploy to VM
 
-        on:
-          push:
-            branches:
-              - main
+on:
+  push:
+    branches:
+      - main  # Atau nama branch yang sesuai
 
-        jobs:
-          deploy:
-            runs-on: ubuntu-latest
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-            steps:
-              - name: Checkout code
-                uses: actions/checkout@v3
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: "latest" # atau tulis versi spesifik
 
-              - name: Setup Node.js
-                uses: actions/setup-node@v3
-                with:
-                  node-version: 20
+    # Install dependencies and build the app on GitHub Actions
+    - name: Install dependencies and build app
+      run: |
+        /home/runner/.bun/bin/bun install
+        /home/runner/.bun/bin/bun run build
 
-              - name: Install dependencies
-                run: npm install
+    # Copy the build result to the VM
+    - name: Copy build files to VM
+      run: |
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no -r build/* ti3a@70.153.16.116:/home/ti3a/agentravel-backend/
 
-              - name: Build project
-                run: npm run build
-                # env:
-                #   MONGODB_URI: ${{ secrets.API_KEY }}
 
-              - name: Deploy project build to Azure Function
-                uses: azure/functions-action@v1
-                with:
-                  app-name: agentravel
-                  publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
-                  package: .
+    # Run app on VM (only after build is copied)
+    - name: Run app on VM
+      run: |
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
+          cd ~/agentravel-backend &&
+          nohup ~/.bun/bin/bun ./backend.js > bun.log 2>&1 &
+        ' >/dev/null 2>&1 & sleep 10

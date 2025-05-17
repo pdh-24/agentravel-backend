@@ -2,10 +2,9 @@ import mongoose from 'mongoose';
 // import dayjs from 'dayjs';
 // import utc from 'dayjs/plugin/utc';
 // import timezone from 'dayjs/plugin/timezone';
-import dbConnect from '@/database/connection/mongodb';
-import { unique } from 'next/dist/build/utils';
+// import dbConnect from '@/database/connection/mongodb';
 
-await dbConnect(); // Pastikan koneksi dilakukan dulu
+// await dbConnect(); // Pastikan koneksi dilakukan dulu
 
 // dayjs.extend(utc);
 // dayjs.extend(timezone);
