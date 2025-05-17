@@ -27,13 +27,18 @@ jobs:
     - name: Copy build files to VM
       run: |
         sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no -r build/* ti3a@70.153.16.116:/home/ti3a/agentravel-backend/
+    
+    - name: Kill existing app process on VM
+      run: |
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
+          echo "Stopping any existing bun processes..."
+          pkill -f "bun ./backend.js" || echo "No process to kill"
+        '
+
     # Run app on VM (only after build is copied)
     - name: Run app on VM
       run: |
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
           cd ~/agentravel-backend &&
-          pkill -f "bun ./backend.js" || true &&
-          sleep 2 &&
           nohup ~/.bun/bin/bun ./backend.js > bun.log 2>&1 &
-          echo "Application started"
-        '
+        ' >/dev/null 2>&1 & sleep 10
