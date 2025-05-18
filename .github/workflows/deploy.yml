@@ -32,7 +32,7 @@ jobs:
       run: |
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
           echo "Stopping any existing bun processes..."
-          exec pkill -f "bun ./backend.js" || echo "No process to kill"
+          exec pkill -f "[b]un ./backend.js" || echo "No process to kill"
         '
 
     # Run app on VM (only after build is copied)
