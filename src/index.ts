@@ -90,7 +90,7 @@ app.get("/pengguna", async c => {
         // Query dan lain-lain
         try {
             const body = await c.req.json();
-            const newUser = new Pengguna({
+            const newUser = await Pengguna.create({
                 username: body.name,
                 email: body.email,
                 password: body.password, // Harus di-hash dalam produksi
