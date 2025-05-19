@@ -4,7 +4,7 @@ import { Hono } from 'hono';
 const pengguna = new Hono();
 
 pengguna
-    .get("/pengguna", async c => {
+    .get("/", async c => {
         console.log("Mengambil data semua pengguna");
 
         // Query dan lain-lain
@@ -26,7 +26,7 @@ pengguna
             }, 500); 
         }
     })
-    .get("/pengguna/:id", async c => {
+    .get("/:id", async c => {
         console.log("Mengambil detail pengguna menurut id");
         
         // Query dan lain-lain
@@ -48,7 +48,7 @@ pengguna
             }, 500); 
         }
     })
-    .get("/admin/pengguna", async c => {
+    .get("/admin", async c => {
         console.log("Mengambil detail pengguna menurut id");
         
         // Query dan lain-lain
@@ -70,14 +70,14 @@ pengguna
             }, 500); 
         }
     })
-    .post("/pengguna", async c => {
+    .post("", async c => {
         console.log("Menambah data pengguna baru");
         
         // Query dan lain-lain
         try {
             const body = await c.req.json();
             const newUser = await Pengguna.create({
-                username: body.name,
+                username: body.username,
                 email: body.email,
                 password: body.password, // Harus di-hash dalam produksi
                 role: body.role,
@@ -95,7 +95,7 @@ pengguna
             return c.json({ error: String(error) }, 500);
         }
     })
-    .put("/pengguna/:id", async c => {
+    .put("/:id", async c => {
         console.log("Memperbarui data pengguna menurut id");
         
         // Query dan lain-lain
@@ -126,7 +126,7 @@ pengguna
             }, 500); 
         }
     })
-    .delete("/pengguna/:id", async c => {
+    .delete("/:id", async c => {
         console.log("Menghapus data pengguna menurut id");
         
         // Query dan lain-lain
