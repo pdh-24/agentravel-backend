@@ -1,0 +1,154 @@
+import Pengguna from '@/database/model/pengguna';
+import { Hono } from 'hono';
+
+const pengguna = new Hono();
+
+pengguna
+    .get("/pengguna", async c => {
+        console.log("Mengambil data semua pengguna");
+
+        // Query dan lain-lain
+        try {
+            const pengguna = await Pengguna.find();
+            // console.log("Cek\n");
+            return c.json({ 
+                status: "berhasil", 
+                data: pengguna 
+            }, 200);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return c.json({ error: error.message }, 400);
+            }
+            return c.json({ 
+                status: "gagal", 
+                message: 'Gagal mengambil data pengguna', 
+                error: String(error) 
+            }, 500); 
+        }
+    })
+    .get("/pengguna/:id", async c => {
+        console.log("Mengambil detail pengguna menurut id");
+        
+        // Query dan lain-lain
+        try {
+            const { id } = c.req.param();
+            const pengguna = await Pengguna.findById(id);
+            return c.json({ 
+                status: "berhasil", 
+                data: pengguna 
+            }, 200);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return c.json({ error: error.message }, 400);
+            }
+            return c.json({ 
+                status  : "gagal", 
+                message : 'Gagal mengambil data pengguna', 
+                error   : String(error) 
+            }, 500); 
+        }
+    })
+    .get("/admin/pengguna", async c => {
+        console.log("Mengambil detail pengguna menurut id");
+        
+        // Query dan lain-lain
+        try {
+            const { username, password } = c.req.query();
+            const pengguna = await Pengguna.find({ username, password });
+            return c.json({ 
+                status: "berhasil", 
+                data: pengguna 
+            }, 200);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return c.json({ error: error.message }, 400);
+            }
+            return c.json({ 
+                status  : "gagal", 
+                message : 'Gagal mengambil data pengguna', 
+                error   : String(error) 
+            }, 500); 
+        }
+    })
+    .post("/pengguna", async c => {
+        console.log("Menambah data pengguna baru");
+        
+        // Query dan lain-lain
+        try {
+            const body = await c.req.json();
+            const newUser = await Pengguna.create({
+                username: body.name,
+                email: body.email,
+                password: body.password, // Harus di-hash dalam produksi
+                role: body.role,
+            });
+    
+            await newUser.save();
+            return c.json({ 
+                message: "Berhasil menambahkan data manual", 
+                data: newUser 
+            });
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return c.json({ error: error.message }, 400);
+            }
+            return c.json({ error: String(error) }, 500);
+        }
+    })
+    .put("/pengguna/:id", async c => {
+        console.log("Memperbarui data pengguna menurut id");
+        
+        // Query dan lain-lain
+        try {
+            const body = await c.req.json();
+            const { id } = c.req.param();
+            const pengguna = await Pengguna.findByIdAndUpdate(id, { $set: 
+                { 
+                  username: body.username,
+                  email: body.email,
+                  password: body.password, // Harus di-hash dalam produksi
+                  role: body.role,
+                }
+            }, { new: true });
+            
+            return c.json({ 
+                status  : "berhasil", 
+                data    : pengguna
+            }, 200);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return c.json({ error: error.message }, 400);
+            }
+            return c.json({ 
+                status  : "gagal", 
+                message : 'Gagal mengambil data pengguna', 
+                error   : String(error) 
+            }, 500); 
+        }
+    })
+    .delete("/pengguna/:id", async c => {
+        console.log("Menghapus data pengguna menurut id");
+        
+        // Query dan lain-lain
+        try {
+            const { id } = c.req.param();
+            await Pengguna.findOneAndDelete({ "id": id });
+            
+            return c.json({ 
+                status: "berhasil", 
+                message: 'Data pengguna berhasil dihapus' 
+            }, 200);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return c.json({ error: error.message }, 400);
+            }
+            return c.json({ 
+                status: "gagal", 
+                message: 'Gagal menghapus data pengguna', 
+                error: String(error) 
+            }, 500); 
+        }
+    })
+;
+
+export { pengguna };

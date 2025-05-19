@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { Pengguna } from "@/database/model/all";
+import Pengguna from "@/database/model/pengguna";
 
 const tes = new Hono();
 
