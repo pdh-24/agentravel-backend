@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import dbConnect from '@/database/connection/mongodb';
 import { pengguna, customer, reservasi, pembayaran, invois, logTransaksi, laporan } from '@/src/routes/all';
 import { tes } from './routes/tes';
+import { autentikasi } from './auth/route';
 
 export const app = new Hono().basePath("/api");
 
@@ -10,6 +11,8 @@ app.route("", tes)
 
 // Koneksi database hanya sekali sebelum rute dijalankan
 await dbConnect();
+
+app.route("", autentikasi);
 /* -------------- MANAJEMEN PENGGUNA -------------- */
 app.route("/pengguna", pengguna)
 
