@@ -4,7 +4,7 @@ import { Hono } from 'hono';
 const logTransaksi = new Hono();
 
 logTransaksi
-    .get("/log-transaksi", async c => {
+    .get("/", async c => {
         console.log("Mendapatkan daftar log transaksi");
         
         // Query dan lain-lain
@@ -27,7 +27,7 @@ logTransaksi
             }, 500);
         }
     })
-    .get("/log-transaksi/:id", async c => {
+    .get("/:id", async c => {
         console.log("Mendapatkan detail log transaksi menurut id");
         
         // Query dan lain-lain

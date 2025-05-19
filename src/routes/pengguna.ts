@@ -70,7 +70,7 @@ pengguna
             }, 500); 
         }
     })
-    .post("", async c => {
+    .post("/", async c => {
         console.log("Menambah data pengguna baru");
         
         // Query dan lain-lain

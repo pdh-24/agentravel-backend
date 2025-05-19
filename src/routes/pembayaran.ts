@@ -4,7 +4,7 @@ import { Hono } from 'hono';
 const pembayaran = new Hono();
 
 pembayaran
-    .post("/pembayaran", async c => {
+    .post("/", async c => {
         console.log("Membuat pembayaran");
         
         // Query dan lain-lain
@@ -29,7 +29,7 @@ pembayaran
             return c.json({ error: String(error) }, 500);
         }
     })
-    .put("/pembayaran/:id", async c => {
+    .put("/:id", async c => {
         console.log("Memperbarui data pembayaran menurut id");
         
         // Query dan lain-lain

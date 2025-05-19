@@ -4,7 +4,7 @@ import { Hono } from 'hono';
 const laporan = new Hono();
 
 laporan
-    .get("/laporan", async c => {
+    .get("/", async c => {
         console.log("Mendapatkan laporan");
 
         // Query dan lain-lain

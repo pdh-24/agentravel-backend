@@ -4,7 +4,7 @@ import { Hono } from 'hono';
 const invois = new Hono();
 
 invois
-    .post("/invois", async c => {
+    .post("/", async c => {
     console.log("Membuat dan mengirim invois");
     
     // Query dan lain-lain
@@ -33,7 +33,7 @@ invois
             return c.json({ error: String(error) }, 500);
         }
     })
-    .get("/invois/:id", async c => {
+    .get("/:id", async c => {
         console.log("Mendapatkan detail invois menurut id");
         
         // Query dan lain-lain

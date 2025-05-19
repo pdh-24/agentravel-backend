@@ -4,7 +4,7 @@ import { Hono } from 'hono';
 const reservasi = new Hono();
 
 reservasi
-    .get("/reservasi", async c => {
+    .get("/", async c => {
         console.log("Mengambil data semua reservasi");
         
         // Query dan lain-lain
@@ -25,7 +25,7 @@ reservasi
             }, 500); 
         }
     })
-    .post("/reservasi", async c => {
+    .post("/", async c => {
         console.log("Menambahkan data reservasi baru");
         
         // Query dan lain-lain
@@ -58,7 +58,7 @@ reservasi
             return c.json({ error: String(error) }, 500);
         }
     })
-    .get("/reservasi/:id", async c => {
+    .get("/:id", async c => {
         console.log("Mengambil detail reservasi menurut id");
         
         // Query dan lain-lain
@@ -80,7 +80,7 @@ reservasi
             }, 500); 
         }
     })
-    .put("/reservasi/:id", async c => {
+    .put("/:id", async c => {
         console.log("Memperbarui data reservasi menurut id");
         
         // Query dan lain-lain
@@ -118,7 +118,7 @@ reservasi
             }, 500); 
         }
     })
-    .delete("/reservasi/:id", async c => {
+    .delete("/:id", async c => {
         console.log("Menghapus reservasi menurut id");
         
         // Query dan lain-lain
