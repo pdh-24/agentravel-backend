@@ -28,6 +28,16 @@ jobs:
       run: |
         sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no -r build/* ti3a@70.153.16.116:/home/ti3a/agentravel-backend/
     
+    - name: Create .env on VM from multiple secrets
+      run: |
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 <<EOF
+            echo "MONGODB_URI=$MONGODB_URI" > ~/agentravel-backend/.env
+            echo "ENDPOINT_KEY=$ENDPOINT_KEY" >> ~/agentravel-backend/.env
+        EOF
+      env:
+        MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        ENDPOINT_KEY: ${{ secrets.ENDPOINT_KEY }}
+
     - name: Kill existing app process on VM
       run: |
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
