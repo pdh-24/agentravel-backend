@@ -28,10 +28,12 @@ autentikasi
         return c.json({
             ok: true,
             message: "Login berhasil",
+            username: username,
             token: token
         })
     })
     .post('signup', async (c) => {
+        /*
         const new_user = await c.req.json() as { username: string, email: string, password: string, role: string };
         await fetch("/api/pengguna", {
             method: "POST",
@@ -46,7 +48,11 @@ autentikasi
             })
         })
         .then(res => res.json())
-        
+        */
+        return c.json({
+            ok: true,
+            message: "Signup feature is currently disabled."
+        })
     })
     .get('signout', async (c) => {
         c.header("Set-Cookie", `token=; HttpOnly; Path=/; Secure; Max-Age=0`);

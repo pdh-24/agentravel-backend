@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import dbConnect from '@/database/connection/mongodb';
-import { pengguna, customer, reservasi, pembayaran, invois, logTransaksi, laporan } from '@/src/routes/all';
+import { pengguna, customer, reservasi, pembayaran, invois, logTransaksi, laporan } from '@/src/routes/routes';
 import { tes } from './routes/tes';
 import { autentikasi } from './auth/route';
 
