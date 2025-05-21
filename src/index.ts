@@ -12,7 +12,7 @@ app.route("", tes)
 app.use(
     '/api/*',
     cors({
-      origin: 'http://example.com',
+      origin: '*',
       allowHeaders: ['Content-Type', 'X-Custom-Header', 'Upgrade-Insecure-Requests'],
       allowMethods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'],
       exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
