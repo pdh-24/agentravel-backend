@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { cors } from 'hono/cors'
 import dbConnect from '@/database/connection/mongodb';
 import { pengguna, customer, reservasi, pembayaran, invois, logTransaksi, laporan } from '@/src/routes/routes';
 import { tes } from './routes/tes';
@@ -8,6 +9,17 @@ export const app = new Hono().basePath("/api");
 
 app.get('/', async (c) => c.json({ message: 'Hello from Hono!' }));
 app.route("", tes)
+app.use(
+    '/api/*',
+    cors({
+      origin: 'http://example.com',
+      allowHeaders: ['Content-Type', 'X-Custom-Header', 'Upgrade-Insecure-Requests'],
+      allowMethods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'],
+      exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
+      maxAge: 600,
+      credentials: true,
+    })
+  )
 
 // Koneksi database hanya sekali sebelum rute dijalankan
 await dbConnect();

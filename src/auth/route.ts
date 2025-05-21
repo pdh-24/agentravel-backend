@@ -6,31 +6,43 @@ const autentikasi = new Hono();
 
 autentikasi
     .post('signin', async (c) => {
-        const { username, password } = await c.req.json();
-        const pengguna = await Pengguna.find({ username, password });
-        
-        if (pengguna.length === 0) {
-            c.json({
-                ok: false,
-                message: "Username dan password tidak valid",
+        try {
+            const { username, password } = await c.req.json();
+            const pengguna = await Pengguna.find({ username, password });
+            
+            if (pengguna.length === 0) {
+                c.json({
+                    ok: false,
+                    message: "Username dan password tidak valid",
+                })
+            }
+            
+            const payload = {
+                username: username,
+                role: "user",
+                exp: Math.floor(Date.now() / 1000) + 3600 * 72, // Token expires in 3 days (72 hours)
+            }
+            
+            const secret = process.env.ENDPOINT_KEY ?? ""; // Replace with your secret key
+            const token = await sign(payload, secret, "HS256");
+            
+            c.header("Set-Cookie", `token=${token}; HttpOnly; Path=/; Secure`);
+            return c.json({
+                ok: true,
+                message: "Login berhasil",
+                username: username,
+                token: token
             })
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return c.json({ error: error.message }, 400);
+            }
+            
+            return c.json({ 
+                status: "gagal", 
+                message: String(error) , 
+            }, 500);
         }
-        
-        const payload = {
-            username: username,
-            role: "user",
-            exp: Math.floor(Date.now() / 1000) + 3600 * 72, // Token expires in 3 days (72 hours)
-        }
-        const secret = process.env.ENDPOINT_KEY ?? ""; // Replace with your secret key
-        const token = await sign(payload, secret, "HS256");
-
-        c.header("Set-Cookie", `token=${token}; HttpOnly; Path=/; Secure`);
-        return c.json({
-            ok: true,
-            message: "Login berhasil",
-            username: username,
-            token: token
-        })
     })
     .post('signup', async (c) => {
         /*

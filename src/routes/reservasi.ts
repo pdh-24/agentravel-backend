@@ -36,6 +36,7 @@ reservasi
                 name: body.name,
                 contact: body.contact, 
                 ticket_id: body.ticket_id,
+                
                 destination: body.destination,
                 date: body.date,
                 estimated_budget: body.estimated_budget,

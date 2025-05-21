@@ -12,6 +12,10 @@ pengguna
         try {
             const pengguna = await Pengguna.find();
             // console.log("Cek\n");
+            return c.json({ 
+                status: "berhasil", 
+                data: pengguna 
+            }, 200);
         } catch (error: unknown) {
             if (error instanceof Error) {
                 return c.json({ error: error.message }, 400);
@@ -23,10 +27,6 @@ pengguna
                 error: String(error) 
             }, 500); 
         }
-        return c.json({ 
-            status: "berhasil", 
-            data: pengguna 
-        }, 200);
     })
     .get("/:id", async c => {
         console.log("Mengambil detail pengguna menurut id");
@@ -135,7 +135,7 @@ pengguna
             }, 500); 
         }
     })
-    .delete("/:id", async c => {
+    .delete("/:id", async c => { 
         console.log("Menghapus data pengguna menurut id");
         
         // Query dan lain-lain
