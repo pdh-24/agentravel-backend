@@ -8,14 +8,21 @@ autentikasi
     .post('signin', async (c) => {
         try {
             const { username, password } = await c.req.json();
-            const pengguna = await Pengguna.find({ username, password });
+            const pengguna = await Pengguna.find({ username});
             
-            if (pengguna.length === 0) {
+            const isMatch = await Bun.password.verify(password, pengguna[0].password);
+            if (!isMatch) {
                 return c.json({
                     ok: false,
                     message: "Username dan password tidak valid",
-                })
+                });
             }
+            // if (pengguna.length === 0) {
+            //     return c.json({
+            //         ok: false,
+            //         message: "Username dan password tidak valid",
+            //     })
+            // }
             
             const payload = {
                 username: username,
@@ -26,7 +33,7 @@ autentikasi
             const secret = process.env.ENDPOINT_KEY ?? ""; // Replace with your secret key
             const token = await sign(payload, secret, "HS256");
             
-            c.header("Set-Cookie", `token=${token}; HttpOnly; Path=/; Secure`);
+            // c.header("Set-Cookie", `token=${token}; HttpOnly; Path=/; Secure`);
             return c.json({
                 ok: true,
                 message: "Login berhasil",

@@ -78,24 +78,34 @@ pengguna
         // Query dan lain-lain
         try {
             const body = await c.req.json();
-            const existingUser = await Pengguna.find(body.username);
+            const existingUser = await Pengguna.find({ username: body.username });
             if (existingUser.length > 0) {
                 return c.json({
                     ok: true, 
-                    message: "Username sudah dipakai", 
+                    message: "Username sudah cek", 
+                    data: existingUser
                 });
             }
+            const argonHash = await Bun.password.hash(body.password, {
+                algorithm: "argon2id",
+                memoryCost: 4, // memory usage in kibibytes
+                timeCost: 3, // the number of iterations
+            });
             const newUser = await Pengguna.create({
                 username: body.username,
                 email: body.email,
-                password: body.password, // Harus di-hash dalam produksi
+                password: argonHash, // Harus di-hash dalam produksi
                 role: body.role,
             });
     
             await newUser.save();
             return c.json({ 
                 message: "Berhasil menambahkan data manual", 
-                data: newUser 
+                data: {
+                    username: newUser.username,
+                    email: newUser.email,
+                    role: newUser.role,
+                } 
             });
         } catch (error: unknown) {
             if (error instanceof Error) {

@@ -16,6 +16,7 @@ app.use(
         allowHeaders: ['Content-Type', 'X-Custom-Header', 'Upgrade-Insecure-Requests'],
         allowMethods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'],
         exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
+        
         maxAge: 600,
         credentials: true,
     })
