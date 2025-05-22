@@ -10,16 +10,16 @@ export const app = new Hono().basePath("/api");
 app.get('/', async (c) => c.json({ message: 'Hello from Hono!' }));
 app.route("", tes)
 app.use(
-    '/api/*',
+    '*',
     cors({
-      origin: '*',
-      allowHeaders: ['Content-Type', 'X-Custom-Header', 'Upgrade-Insecure-Requests'],
-      allowMethods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'],
-      exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
-      maxAge: 600,
-      credentials: true,
+        origin: '*',
+        allowHeaders: ['Content-Type', 'X-Custom-Header', 'Upgrade-Insecure-Requests'],
+        allowMethods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'],
+        exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
+        maxAge: 600,
+        credentials: true,
     })
-  )
+)
 
 // Koneksi database hanya sekali sebelum rute dijalankan
 await dbConnect();

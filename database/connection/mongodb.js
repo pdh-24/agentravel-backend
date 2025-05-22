@@ -27,6 +27,8 @@ async function dbConnect() {
   } catch (error) {
     console.error('[MongoDB] ❌ Connection error:', error);
     throw error;
+  } finally {
+    
   }
 }
 

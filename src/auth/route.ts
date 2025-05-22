@@ -11,7 +11,7 @@ autentikasi
             const pengguna = await Pengguna.find({ username, password });
             
             if (pengguna.length === 0) {
-                c.json({
+                return c.json({
                     ok: false,
                     message: "Username dan password tidak valid",
                 })
