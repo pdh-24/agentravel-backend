@@ -4,6 +4,8 @@ import dbConnect from '@/database/connection/mongodb';
 import { pengguna, customer, reservasi, pembayaran, invois, logTransaksi, laporan } from '@/src/routes/routes';
 import { tes } from './routes/tes';
 import { autentikasi } from './auth/route';
+import { check_authToken } from './middleware/check_token';
+import { serve } from '@hono/node-server'
 
 export const app = new Hono().basePath("/api");
 
@@ -12,7 +14,7 @@ app.route("", tes)
 app.use(
     '*',
     cors({
-        origin: '*',
+        origin: 'http://localhost:3000',
         allowHeaders: ['Content-Type', 'X-Custom-Header', 'Upgrade-Insecure-Requests'],
         allowMethods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'],
         exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
@@ -21,7 +23,7 @@ app.use(
         credentials: true,
     })
 )
-
+// .use("/api/*", check_authToken)
 // Koneksi database hanya sekali sebelum rute dijalankan
 await dbConnect();
 
@@ -49,8 +51,12 @@ app.route("/log-transaksi", logTransaksi);
 app.route("/laporan", laporan)
 
 // Jalankan aplikasi di port 3000
-export default { 
-    port: 3000, 
-    fetch: app.fetch, 
-} 
-// export default app
+// export default { 
+//     port: 3001, 
+//     fetch: app.fetch, 
+// } 
+// serve({
+//     fetch: app.fetch,
+//     port: 3000,
+// });
+export default app

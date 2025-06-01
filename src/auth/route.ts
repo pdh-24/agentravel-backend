@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { setCookie, getCookie } from "hono/cookie";
 import Pengguna from "@/database/model/pengguna";
 import { sign, verify } from "hono/jwt";
 
@@ -8,7 +9,7 @@ autentikasi
     .post('signin', async (c) => {
         try {
             const { username, password } = await c.req.json();
-            const pengguna = await Pengguna.find({ username});
+            const pengguna = await Pengguna.find({ username: username.toLowerCase() });
             
             const isMatch = await Bun.password.verify(password, pengguna[0].password);
             if (!isMatch) {
@@ -25,28 +26,39 @@ autentikasi
             // }
             
             const payload = {
+                id: pengguna[0]._id,
                 username: username,
-                role: "user",
+                email: pengguna[0].email,
+                role: pengguna[0].role,
                 exp: Math.floor(Date.now() / 1000) + 3600 * 72, // Token expires in 3 days (72 hours)
             }
             
             const secret = process.env.ENDPOINT_KEY ?? ""; // Replace with your secret key
             const token = await sign(payload, secret, "HS256");
             
-            // c.header("Set-Cookie", `token=${token}; HttpOnly; Path=/; Secure`);
+            setCookie(c, `token`, token, { 
+                path:"/" , 
+                domain: "http://localhost:3000", // Adjust domain as needed
+                httpOnly: false, 
+                secure: false, 
+                maxAge: 60 * 60 * 24 * 3 // Set cookie for 3 days
+            });
+            // console.log(c.header.);
             return c.json({
                 ok: true,
+                loggedIn: true,
                 message: "Login berhasil",
                 username: username,
                 token: token
             })
         } catch (error: unknown) {
             if (error instanceof Error) {
-                return c.json({ error: error.message }, 400);
+                return c.json({ loggedIn: false, error: error.message }, 400);
             }
             
             return c.json({ 
                 status: "gagal", 
+                loggedIn: false,
                 message: String(error) , 
             }, 500);
         }
