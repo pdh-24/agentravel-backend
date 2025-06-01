@@ -8,7 +8,7 @@ export default defineConfig({
   splitting: false,
   clean: true,
   dts: false, // Kalau mau .d.ts, ubah ke true
-  target: 'es2020',
+  target: 'esnext',
   shims: false,
   esbuildOptions(options) {
     options.alias = {
