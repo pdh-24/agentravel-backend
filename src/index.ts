@@ -5,7 +5,6 @@ import { pengguna, customer, reservasi, pembayaran, invois, logTransaksi, lapora
 import { tes } from './routes/tes';
 import { autentikasi } from './auth/route';
 import { check_authToken } from './middleware/check_token';
-import { serve } from '@hono/node-server'
 
 export const app = new Hono().basePath("/api");
 
@@ -51,12 +50,8 @@ app.route("/log-transaksi", logTransaksi);
 app.route("/laporan", laporan)
 
 // Jalankan aplikasi di port 3000
-// export default { 
-//     port: 3001, 
-//     fetch: app.fetch, 
-// } 
-// serve({
-//     fetch: app.fetch,
-//     port: 3000,
-// });
-export default app
+export default { 
+    port: 3001, 
+    fetch: app.fetch, 
+} 
+// export default app

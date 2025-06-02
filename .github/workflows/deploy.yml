@@ -1,31 +1,54 @@
-name: Deploy Azure Function
+name: Deploy to VM
 
 on:
   push:
     branches:
-      - main  # atau branch yang kamu pakai
+      - main  # Atau nama branch yang sesuai
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: "latest" # atau tulis versi spesifik
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18  # versi Node sesuai kebutuhan
+    # Install dependencies and build the app on GitHub Actions
+    - name: Install dependencies and build app
+      run: |
+        /home/runner/.bun/bin/bun install
+        /home/runner/.bun/bin/bun run build
+    # Copy the build result to the VM
+    - name: Copy build files to VM
+      run: |
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no -r build/* ti3a@70.153.16.116:/home/ti3a/agentravel-backend/
+    
+    - name: Create .env on VM from multiple secrets
+      run: |
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 <<EOF
+            echo "MONGODB_URI=$MONGODB_URI" > ~/agentravel-backend/.env
+            echo "ENDPOINT_KEY=$ENDPOINT_KEY" >> ~/agentravel-backend/.env
+        EOF
+      env:
+        MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        ENDPOINT_KEY: ${{ secrets.ENDPOINT_KEY }}
 
-      - name: Install dependencies
-        run: npm install
+    - name: Kill existing app process on VM
+      run: |
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
+          echo "Stopping any existing bun processes..."
+          pkill -f "[b]un ./backend.js" || echo "No process to kill"
+        '
 
-      - name: Build project
-        run: npm run build
-
-      - name: Deploy to Azure Functions
-        uses: azure/functions-action@v1
-        with:
-          app-name: agentravel   # ganti dengan nama Azure Function mu
-          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
-          package: './build'   # folder hasil build, sesuaikan dengan output kamu
+    # Run app on VM (only after build is copied)
+    - name: Run app on VM
+      run: |
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ti3a@70.153.16.116 '
+          cd ~/agentravel-backend &&
+          nohup ~/.bun/bin/bun ./backend.js > bun.log 2>&1 &
+        ' >/dev/null 2>&1 & sleep 10
